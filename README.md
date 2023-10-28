@@ -31,6 +31,9 @@ A tool for security research and bug bounty that uses a headless browser to wrap
 
 # Help
 ` -c [int] Set the number of concurrent threads for processing. (default 5)          `
+
 `  -cookies [string] Provide custom cookies for authentication while making requests.`
+
 `  -o [string] Specify the output file where results will be saved.                  `
+
 `  -r [int] Set a rate limit for requests in milliseconds.                           `
