@@ -22,3 +22,6 @@ A tool for security research and bug bounty that uses a headless browser to wrap
   * AppendChild();
   * JQueryAjax();
   * HistoryAPI();
+
+# Install
+`go install github.com/raverrr/mutiny@latest`
