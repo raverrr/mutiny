@@ -37,3 +37,6 @@ A tool for security research and bug bounty that uses a headless browser to wrap
 `  -o [string] Specify the output file where results will be saved.                  `
 
 `  -r [int] Set a rate limit for requests in milliseconds.                           `
+
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/r4v3rrr)
