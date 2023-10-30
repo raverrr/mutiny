@@ -33,7 +33,7 @@ func displayBanner() {
           color.Red("                 ▀    ▀▀▀             █   ██        ")
         fmt.Println("                                               ")
         fmt.Println("                                                                   ")
-         color.Blue("                      Mutiny Version: 1.0.0                   ")
+         color.Blue("                      Mutiny Version: 1.0.1                   ")
         fmt.Println("                                                                   ")
           color.Red("-- You're off the edge of the app, mate. Here there be monsters. --")
         fmt.Println("                                                                   ")
