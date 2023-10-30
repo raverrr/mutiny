@@ -61,9 +61,11 @@ function logFunctionCall(message) {
     functionCallsCount[message] = 1;
   }
 }
+
 function generateSummary() {
   let summary = '';
-  for (const [message, count] of Object.entries(functionCallsCount)) {
+  const sortedEntries = Object.entries(functionCallsCount).sort((a, b) => a[0].localeCompare(b[0]));
+  for (const [message, count] of sortedEntries) {
     summary += '\n---' + message + ' ' + count + ' time(s)';
   }
   return summary;
@@ -234,6 +236,77 @@ function wrapHistoryAPI() {
   };
 }
 
+function wrapCloneNode() {
+  const originalCloneNode = Element.prototype.cloneNode;
+  Element.prototype.cloneNode = function(deep) {
+    logFunctionCall('cloneNode called');
+    return originalCloneNode.apply(this, arguments);
+  };
+}
+
+function wrapRemoveChild() {
+  const originalRemoveChild = Node.prototype.removeChild;
+  Node.prototype.removeChild = function(child) {
+    logFunctionCall('removeChild called');
+    return originalRemoveChild.apply(this, arguments);
+  };
+}
+
+function wrapGetCurrentPosition() {
+  const originalGetCurrentPosition = navigator.geolocation.getCurrentPosition;
+  navigator.geolocation.getCurrentPosition = function(successCallback, errorCallback, options) {
+    logFunctionCall('getCurrentPosition called');
+    return originalGetCurrentPosition.apply(this, arguments);
+  };
+}
+
+function wrapAddEventListener() {
+  const originalAddEventListener = EventTarget.prototype.addEventListener;
+  EventTarget.prototype.addEventListener = function(type, listener, options) {
+    logFunctionCall('addEventListener: ' + type);
+    return originalAddEventListener.apply(this, arguments);
+  };
+}
+
+function wrapPostMessage() {
+  const originalPostMessage = window.postMessage;
+  window.postMessage = function(message, targetOrigin, transfer) {
+    logFunctionCall('postMessage: ' + targetOrigin);
+    return originalPostMessage.apply(this, arguments);
+  };
+}
+
+function wrapFetchAbort() {
+  const originalAbort = AbortController.prototype.abort;
+  AbortController.prototype.abort = function() {
+    if (this.signal && this.signal.aborted && this.signal.controller) {
+      const request = this.signal.controller.request;
+      const url = request ? request.url : "Unknown URL";
+      logFunctionCall('Fetch request aborted: ' + url);
+    } else {
+      logFunctionCall('Fetch request aborted: Unknown URL');
+    }
+    return originalAbort.apply(this, arguments);
+  };
+}
+
+function wrapSetInterval() {
+  const originalSetInterval = window.setInterval;
+  window.setInterval = function(callback, delay) {
+    logFunctionCall('setInterval called');
+    return originalSetInterval.apply(this, arguments);
+  };
+}
+
+function wrapSetTimeout() {
+  const originalSetTimeout = window.setTimeout;
+  window.setTimeout = function(callback, delay) {
+    logFunctionCall('setTimeout called');
+    return originalSetTimeout.apply(this, arguments);
+  };
+}
+
+
 function wrapAllFunctions() {
   wrapInnerHTML();
   wrapDocumentWrite();
@@ -252,6 +325,14 @@ function wrapAllFunctions() {
   wrapAppendChild();
 //  wrapJQueryAjax(); breaks. MAde conditional
   wrapHistoryAPI();
+  wrapCloneNode();
+  wrapRemoveChild();
+  wrapGetCurrentPosition();
+  wrapAddEventListener();
+  wrapPostMessage();
+  wrapFetchAbort();
+  wrapSetInterval();
+  wrapSetTimeout();
 }
 
 wrapAllFunctions();`
