@@ -5,23 +5,32 @@ A tool for security research and bug bounty that uses a headless browser to wrap
 
 
 # Wrapped functions:
-  * InnerHTML();
-  * DocumentWrite();
-  * SetAttribute();
-  * WindowOpen();
-  * InsertAdjacentHTML();
-  * AjaxSend();
-  * Fetch();
-  * Eval();
-  * FormSubmit();
-  * LocalStorage();
-  * SessionStorage();
-  * SendBeacon();
-  * WebSocket();
-  * CreateElement();
-  * AppendChild();
-  * JQueryAjax();
-  * HistoryAPI();
+  * innerHTML
+  * documentWrite
+  * setAttribute
+  * windowOpen
+  * insertAdjacentHTML
+  * ajaxSend
+  * fetch
+  * eval
+  * formSubmit
+  * localStorage
+  * sessionStorage
+  * sendBeacon
+  * webSocket
+  * createElement
+  * appendChild
+  * JQueryAjax
+  * historyAPI
+  * cloneNode
+  * removeChild
+  * getCurrentPosition (Geolocation)
+  * addEventListener
+  * postMessage
+  * abort (fetch abort)
+  * setInterval
+  * setTimeout
+
 
 # Install
 `go install github.com/raverrr/mutiny@latest`
